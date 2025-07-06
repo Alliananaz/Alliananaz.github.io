@@ -16,8 +16,7 @@ export default function App() {
     //     </div>
     //     <div className="flex border justify-center items-center">D</div>
     // </div>
-    <h1 className="text-5xl font-bold underline">
-      Hello world!
-    </h1>
+    <h1 className="text-red-500 text-4xl">Hello Tailwind</h1>
+
   )
 }
