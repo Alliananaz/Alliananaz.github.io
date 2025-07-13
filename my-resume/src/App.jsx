@@ -13,7 +13,7 @@ export default function App() {
     <>
       <div className='mb-10'> {/*change later !!!! */}
         <Header/>
-        <hr/>
+        {/* <hr/> */}
         <Experience/>
         <Education/> 
         <Other/> 
