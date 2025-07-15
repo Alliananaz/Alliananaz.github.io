@@ -11,13 +11,15 @@ import Referance from './Referance.jsx'
 export default function App() {
   return (
     <>
-      <div className='mb-10'> {/*change later !!!! */}
-        <Header/>
-        {/* <hr/> */}
-        <Experience/>
-        <Education/> 
-        <Other/> 
-        <Referance/>
+      <div className='min-h-screen flex justify-center'> 
+        <div className='w-full max-w-3xl flex flex-col p-10 shadow-lg rounded'> 
+          <Header/>
+          <Experience/>
+          <Education/> 
+          <Other/> 
+          <Referance/>
+        </div>
+        
       </div>
     </>
   )
