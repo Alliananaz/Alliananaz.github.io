@@ -1,3 +1,3 @@
 export default function ExperienceDate({text}) {
-    return <div>{text}</div>
+    return <div className="text-gray-600">{text}</div>
 }

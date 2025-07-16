@@ -4,7 +4,7 @@ import Title from './Title.jsx'
 export default function Referance(){
     return (
         <>
-        <div className='bg-blue-200 p-10'>
+        <div className='bg-blue-200 flex justify-center p-10'>
             <Title text="Referance" />
             <div className='mt-6 ms-16'>
                 <p>Tilgjengelig ved forespørsel</p>
