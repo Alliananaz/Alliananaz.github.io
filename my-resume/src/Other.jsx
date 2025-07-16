@@ -1,14 +1,14 @@
 import Title from './Title.jsx'
-import ExperienceDate from './ExperienceDate.jsx'
-import Place from './Place.jsx'
+import OtherHeading from './OtherHeading.jsx'
+import CornerBorder from './CornerBorder.jsx'
 
 
 export default function Other(){
     return (
         <>
-        <div className='relative bg-green-200 p-10 rounded-xl'> 
-            <Title text="OTHER" />
-            <div className='bg-green-300 p-5'>
+        <div className='relative p-10 rounded-xl shadow-lg'> 
+            <Title text="ANNET" />
+            <div className='p-5'>
                 <div className=''>
                     <OtherHeading text= "Språk" />
                     <p>
@@ -46,17 +46,11 @@ export default function Other(){
                 </div>
             </div>
 
-            <div className="absolute top-0 left-0 w-5 h-5 border-t-5 border-l-5 border-black rounded-tl-md" />
-            <div className="absolute top-0 right-0 w-5 h-5 border-t-5 border-r-5 border-black rounded-tr-md" />
-            <div className="absolute bottom-0 left-0 w-5 h-5 border-b-5 border-l-5 border-black rounded-bl-md" />
-            <div className="absolute bottom-0 right-0 w-5 h-5 border-b-5 border-r-5 border-black rounded-br-md" />
-        </div>
-            
+            <CornerBorder/>
+        </div>    
         </>
     )
 }
 
-function OtherHeading({text}) {
-    return <div className="text-lg font-semibold">{text}</div>
-}
+
 

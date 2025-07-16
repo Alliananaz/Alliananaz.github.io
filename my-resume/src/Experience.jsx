@@ -1,14 +1,15 @@
 import Title from './Title.jsx'
 import ExperienceDate from './ExperienceDate.jsx'
-import Place from './Place.jsx'
+import Place from './OtherHeading.jsx'
+import CornerBorder from './CornerBorder.jsx'
 
 
 export default function Experience(){
     return (
         <>
-        <div className='relative bg-red-200 p-10 rounded-xl'> 
+        <div className='relative p-10 rounded-xl shadow-lg'> 
             <Title text="ARBEIDSERFARING" />
-            <div className='bg-red-300 p-5'>
+            <div className='p-5'>
                 <div className=''>
                     <ExperienceDate text= "07.2023 - Nå" />
                     <Place text = "Sabi Sushi Fornebu (Servitør tilkallings-/ekstrahjelp)" />
@@ -29,11 +30,7 @@ export default function Experience(){
                     </p>
                 </div>
 
-                <div className="absolute top-0 left-0 w-5 h-5 border-t-5 border-l-5 border-black rounded-tl-md" />
-                <div className="absolute top-0 right-0 w-5 h-5 border-t-5 border-r-5 border-black rounded-tr-md" />
-                <div className="absolute bottom-0 left-0 w-5 h-5 border-b-5 border-l-5 border-black rounded-bl-md" />
-                <div className="absolute bottom-0 right-0 w-5 h-5 border-b-5 border-r-5 border-black rounded-br-md" />
-            
+                <CornerBorder/>
             </div>
             
         </div>
