@@ -6,8 +6,8 @@ import Place from './Place.jsx'
 export default function Other(){
     return (
         <>
-        <div className='bg-green-200 p-10'> 
-            <Title text="Annet" />
+        <div className='relative bg-green-200 p-10 rounded-xl'> 
+            <Title text="OTHER" />
             <div className='bg-green-300 p-5'>
                 <div className=''>
                     <OtherHeading text= "Språk" />
@@ -45,6 +45,11 @@ export default function Other(){
                     <br/>
                 </div>
             </div>
+
+            <div className="absolute top-0 left-0 w-5 h-5 border-t-5 border-l-5 border-black rounded-tl-md" />
+            <div className="absolute top-0 right-0 w-5 h-5 border-t-5 border-r-5 border-black rounded-tr-md" />
+            <div className="absolute bottom-0 left-0 w-5 h-5 border-b-5 border-l-5 border-black rounded-bl-md" />
+            <div className="absolute bottom-0 right-0 w-5 h-5 border-b-5 border-r-5 border-black rounded-br-md" />
         </div>
             
         </>

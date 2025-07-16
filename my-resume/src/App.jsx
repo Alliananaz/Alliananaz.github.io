@@ -5,22 +5,26 @@ import Experience from './Experience.jsx'
 import Education from './Education.jsx'
 import Other from './Other.jsx'
 import Referance from './Referance.jsx'
+import BackButton from './BackButton.jsx'
 
 
 
 export default function App() {
   return (
     <>
-      <div className='min-h-screen flex justify-center'> 
-        <div className='w-full max-w-3xl flex flex-col p-10 shadow-lg rounded'> 
-          <Header/>
-          <Experience/>
-          <Education/> 
-          <Other/> 
-          <Referance/>
+      <div className='relative min-h-screen '>
+        <BackButton/>
+        <div className='min-h-screen flex justify-center'> 
+          <div className='w-full max-w-2xl my-10 flex flex-col space-y-10'> 
+            <Header/>
+            <Experience/>
+            <Education/> 
+            <Other/> 
+            <Referance/>
+          </div>
         </div>
-        
       </div>
+      
     </>
   )
 }
