@@ -4,7 +4,11 @@ export default {
     "./index.html","./src/**/*.{js,jsx,ts,tsx,html}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        shadows: ['"Shadows Into Light"', 'cursive'],
+      },
+    },
   },
   plugins: [],
 }

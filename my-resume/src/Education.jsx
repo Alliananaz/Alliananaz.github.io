@@ -30,3 +30,21 @@ export default function Education(){
     )
 }
 
+// polaroid frame example 
+{/* <div className='relative bg-gray-100 p-5 h-120 shadow-lg'> 
+    <div className='bg-slate-50 h-80 p-5'>
+        <div className=''>
+            <ExperienceDate text= "08.2023 - Nå" />
+            <EducationType text = "Bachelor i Informatikk: design, bruk, interaksjon" />
+            <p>Universitet i Oslo </p>
+        </div>
+        <br/>
+        <div className=''>
+            <ExperienceDate text= "08.2020 - 06.2023" />
+            <EducationType text = "Studiespesialierende med realfag" />
+            <p>Stabekk Videregående Skole</p>
+        </div>
+    </div>
+    <p className="p-5 font-shadows text-2xl text-center font-semibold ">UTDANNELSE</p>
+</div> */}
+

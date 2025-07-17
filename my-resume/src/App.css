@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body, html, #root {
   margin: 0 auto;
   padding: 0;
@@ -45,4 +49,10 @@ body, html, #root {
 
 .hdr {
   background-size: cover; 
+}
+
+.shadows-into-light-regular {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
