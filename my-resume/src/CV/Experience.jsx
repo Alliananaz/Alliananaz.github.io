@@ -7,11 +7,11 @@ import CornerBorder from './CornerBorder.jsx'
 export default function Experience(){
     return (
         <>
-        <div className='relative p-10 rounded-xl shadow-lg'> 
+        <div className='relative p-5 sm:p-10 rounded-xl shadow-lg'> 
             <Title text="ARBEIDSERFARING" />
-            <div className='p-5'>
+            <div className='p-5 space-y-8'>
                 <div className=''>
-                    <ExperienceDate text= "07.2023 - Nå" />
+                    <ExperienceDate text= "08.2023 - Nå" />
                     <Place text = "Sabi Sushi Fornebu (Servitør tilkallings-/ekstrahjelp)" />
                     <p className=''>
                         Arbeidsbeskrivelse: Tar imot bestillinger og serverer mat og drikke med fokus på god
@@ -19,7 +19,6 @@ export default function Experience(){
                         Håndterer betalinger og kasseoppgjør, og sørger for at restaurantområdet er rent og ryddig. 
                     </p>
                 </div>
-                <br/>
                 <div className=''>
                     <ExperienceDate text = "08.2022 - 10.2023" />
                     <Place text = "YX 7-eleven Høvik (Butikkmedarbeider deltid)" />
@@ -29,10 +28,8 @@ export default function Experience(){
                         drikke. Sørger for renhold og vedlikehold av butikken og området rundt. 
                     </p>
                 </div>
-
                 <CornerBorder/>
             </div>
-            
         </div>
         </>
     )

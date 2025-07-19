@@ -29,7 +29,7 @@ export default function App() {
       <div className='relative min-h-screen '>
         
         <div className='min-h-screen flex justify-center'> 
-          <div className='w-full max-w-5xl my-10 flex flex-col space-y-10'> 
+          <div className='w-full max-w-3xl my-10 flex flex-col space-y-10'> 
             <Forside/>
           </div>
         </div>
