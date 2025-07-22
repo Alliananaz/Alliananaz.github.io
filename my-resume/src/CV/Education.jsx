@@ -46,3 +46,16 @@ export default function Education(){
     <p className="p-5 font-shadows text-2xl text-center font-semibold ">UTDANNELSE</p>
 </div> */}
 
+// grid to komponenter ved siden av hverandre
+{/* <div className="grid grid-cols-10 gap-4 flex justify-center">
+    <div className="col-span-5 bg-neutral-300 h-80 rounded-xl"></div>
+    <div className="col-span-5 col-start-6 p-10 bg-neutral-50 border-4 h-[400px] overflow-auto">
+        <div className="bg-red-300 mt-6">
+            <p className="mb-12 text-3xl text-center">Heyy and welcome to my website:p</p>
+            <p className="text-xl text-center font-semibold">Please select a filter</p>
+        </div>
+    </div>
+    {/* <div className="col-span-1 bg-neutral-300 h-80 rounded-xl"></div> 
+</div> 
+*/}
+
