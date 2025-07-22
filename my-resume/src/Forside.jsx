@@ -11,21 +11,21 @@ export default function Forside(){
                         <div className="mt-5 ms-8 bg-red-400 sm:h-65 sm:w-65 flex justify-center rounded-md">
                             Bilde    
                         </div>
-                        <p className="ms-6 p-2">Project name</p>
+                        <p className="bg-blue-200 ms-6 p-2">Project name</p>
                     </div>
                     <div className="col-span-5 col-start-6 p-4 bg-red-300">
-                        <p className="mt-8 text-lg font-semibold text-center">
+                        <p className="bg-blue-200 mt-8 text-lg font-semibold text-center">
                             Please select a project
                         </p>
-                        <div className="p-6 grid grid-cols-2 justify-items-center gap-2 overflow-auto">
+                        <div className="p-2 grid grid-cols-2 justify-items-center gap-2 bg-red-500 h-[250px] w-[250px] overflow-auto">
                             <div className="h-25 w-25 bg-red-200 rounded-md">01</div>
                             <div className="h-25 w-25 bg-red-200 rounded-md">02</div>
                             <div className="h-25 w-25 bg-red-200 rounded-md">03</div>
                             <div className="h-25 w-25 bg-red-200 rounded-md">04</div>
                         </div>
-                        <div className=''>
-                            <button className="text-lg px-4 py-2 bg-yellow-200 hover:bg-yellow-300 border-black rounded-md">
-                                Read more
+                        <div className='mt-auto self-end bg-red-50'>
+                            <button className="text-lg px-4 py-2 hover:bg-yellow-300 border-black rounded-md">
+                                Read more →
                             </button>
                         </div>
                     </div>
