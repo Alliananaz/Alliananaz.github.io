@@ -1,7 +1,7 @@
 import Title from './Title.jsx'
 import ExperienceDate from './ExperienceDate.jsx'
 import EducationType from './OtherHeading.jsx'
-import CornerBorder from './CornerBorder.jsx'
+import CornerBorder from '../CornerBorder.jsx'
 
 
 

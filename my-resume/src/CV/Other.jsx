@@ -1,6 +1,6 @@
 import Title from './Title.jsx'
 import OtherHeading from './OtherHeading.jsx'
-import CornerBorder from './CornerBorder.jsx'
+import CornerBorder from '../CornerBorder.jsx'
 
 
 export default function Other(){

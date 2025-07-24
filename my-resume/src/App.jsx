@@ -15,6 +15,7 @@ export default function App() {
   return (
     <>
       <Portfolio/>
+      
       {/* <div className='relative min-h-screen '>
         <BackButton/>
         <div className='min-h-screen flex justify-center'> 

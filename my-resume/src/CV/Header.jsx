@@ -1,4 +1,4 @@
-import CornerBorder from './CornerBorder.jsx'
+import CornerBorder from '../CornerBorder.jsx'
 
 
 export default function Header(){

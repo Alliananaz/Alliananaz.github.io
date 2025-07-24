@@ -1,7 +1,7 @@
 import Title from './Title.jsx'
 import ExperienceDate from './ExperienceDate.jsx'
 import Place from './OtherHeading.jsx'
-import CornerBorder from './CornerBorder.jsx'
+import CornerBorder from '../CornerBorder.jsx'
 
 
 export default function Experience(){
