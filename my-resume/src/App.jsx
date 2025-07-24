@@ -6,13 +6,15 @@ import Education from './CV/Education.jsx'
 import Other from './CV/Other.jsx'
 import Referance from './CV/Referance.jsx'
 import BackButton from './CV/BackButton.jsx'
-import Forside from './Forside.jsx'
+import Forside from './Forside/Forside.jsx'
+import Portfolio from './Portfolio.jsx'
 
 
 
 export default function App() {
   return (
     <>
+      <Portfolio/>
       {/* <div className='relative min-h-screen '>
         <BackButton/>
         <div className='min-h-screen flex justify-center'> 
@@ -26,14 +28,14 @@ export default function App() {
         </div>
       </div> */}
 
-      <div className='relative min-h-screen '>
+      {/* <div className='relative min-h-screen '>
         
         <div className='min-h-screen flex justify-center'> 
           <div className='w-full max-w-3xl my-10 flex flex-col space-y-10'> 
             <Forside/>
           </div>
         </div>
-      </div>
+      </div> */}
       
     </>
   )
