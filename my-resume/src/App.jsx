@@ -5,7 +5,7 @@ import Experience from './CV/Experience.jsx'
 import Education from './CV/Education.jsx'
 import Other from './CV/Other.jsx'
 import Referance from './CV/Referance.jsx'
-import BackButton from './CV/BackButton.jsx'
+import BackButton from './BackButton.jsx'
 import Forside from './Forside/Forside.jsx'
 import Portfolio from './Portfolio.jsx'
 
