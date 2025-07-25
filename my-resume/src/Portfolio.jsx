@@ -3,7 +3,7 @@ import { useRef } from "react";
 import milkcarton_tn from "./assets/images/milkcarton_tn.png"
 import dino_tn from "./assets/images/dino_tn.png"
 import xhotel_tn from "./assets/images/xhotel_tn.png"
-import milkcarton_tn from "./assets/images/milkcarton_tn.png"
+import solmate_tn from "./assets/images/solmate2_tn.png"
 import CornerBorder from "./CornerBorder";
 
 export default function Portfolio(){
@@ -21,40 +21,79 @@ export default function Portfolio(){
 
     return(
         <div className="min-h-screen flex items-center justify-center p-10">
-            <div className="bg-red-900 w-full max-w-5xl">
-                <h1 className="text-right bg-red-200 font-semibold mb-4"> 
-                    <div>PROJECT</div>
-                    <div>PORTFOLIO</div>
-                </h1>
+            <div className="w-full max-w-4xl">
+                <div className="mb-4">
+                    <h1 className="text-right font-semibold mb-4"> 
+                        <div>PROJECT</div>
+                        <div>PORTFOLIO</div>
+                    </h1>
+                    <footer className="text-right">
+                        <p>&copy; {new Date().getFullYear()} Alliananaz </p>
+                    </footer>
+                </div>
+                
 
                 <div className="grid md:grid-cols-2 gap-2">
-                    <div className="flex flex-col gap-4 bg-blue-200 p-4">
+                    <div className="flex flex-col gap-12 p-4">
                         <ProjectCard
                             projectnr = "01"
+                            projectyear = "2025 - IN2000 course project"
+                            projecttitle = "SolMate App"
+                            projectimage = {solmate_tn}
+                            onClick = {handleClick}
+                            description = ""
+                        />
+                        <ProjectCard
+                            projectnr = "02"
+                            projectyear = "2024 - IN1060 course project"
                             projecttitle = "Milk Carton"
                             projectimage = {milkcarton_tn}
                             onClick = {handleClick}
-                            description = "jkhefo iq oeidhq eufhweuf uwefjwe uefgw uehfouwyewb iuwej wiuefhwjeb "
+                            description = "This smart milk carton was a tangible prototype my team, Innotink, designed and produced for the IN1060 - User-oriented design course. This project’s main goal was to collaborate closely with users and create a technical solution related to the theme “on/off”. The icons serves as a signal for both users and customers when type of milk is low or empty. More details about the project can be found on Innotink’s website via IN1060 course page"
                         />
-                        <div className="bg-red-700 rounded-xl h-100"></div>
-                        <div className="bg-red-700 rounded-xl h-100"></div>
+                        <ProjectCard
+                            projectnr = "03"
+                            projectyear = "2022 - IT2 course assignment"
+                            projecttitle = "Dino Game"
+                            projectimage = {dino_tn}
+                            onClick = {handleClick}
+                            description = "Dino-Game is a game I developed as a part of an assignemnt for my highschool IT2 course, inspired by Google's iconic dinosaur game. This assignment was coded using Python and Pygame, and was programmed using Thonny."
+                        />
                     </div>
 
-                    <div className="flex flex-col gap-4 bg-red-50 p-4 md:mt-30">
-                        <div className="bg-red-700 rounded-xl h-100"></div>
-                        <div className="bg-red-700 rounded-xl h-100"></div>
+                    <div className="flex flex-col gap-12 p-4 md:mt-30">
+                        <ProjectCard
+                            projectnr = "04"
+                            projectyear = "2021 - IT1 course assignment"
+                            projecttitle = "X-Hotel Website"
+                            projectimage = {xhotel_tn}
+                            onClick = {handleClick}
+                            description = "'X Hotel is a website I developed as an assignment for my highschool IT1 course. This assignment was coded in Visual Studio Code, using HTML and CSS. The code to the website is on my GitHub under XXX."
+                        />
+                        <ProjectCard
+                            projectnr = "05"
+                            projectyear = "2025 - Summer project"
+                            projecttitle = "This Website"
+                            projectimage = {""}
+                            onClick = {handleClick}
+                            description = ""
+                        />
+                        
                     </div>
                 </div>
                 
                 { showDescription && (
                     <div 
                         ref = {descriptionRef}
-                        className="mt-12 p-4 bg-blue-300 rounded-xl border border-gray-200"
+                        className="relative mt-12 p-4 rounded-lg shadow-lg border border-gray-200"
                     >
                         <p className="text-2xl font-semibold mb-2">
-                            {showDescription.projectnr} {showDescription.projecttitle}
+                            {/* {showDescription.projectnr}  */}
+                            {showDescription.projecttitle}
                         </p>
-                        <p className="text-base mb-2"> {showDescription.description} </p>
+                        <p className="text-base text-gray-500">{showDescription.projectyear}</p>
+                        <div className="text-base mt-2"> {showDescription.description} </div>
+                        <CornerBorder/>
                     </div>
                 )}
             </div>
@@ -62,20 +101,20 @@ export default function Portfolio(){
     );
 }
 
-const ProjectCard = ({projectnr, projecttitle, projectimage, onClick, description}) => {
+const ProjectCard = ({projectnr, projectyear, projecttitle, projectimage, onClick, description}) => {
     const handleCardClick = () => {
-        onClick({projecttitle, projectnr, description});
+        onClick({projectnr, projectyear, projecttitle, description});
     }; 
     return(
         <div 
-            className="bg-amber-200 rounded-lg shadow-lg h-100 relative overflow-hidden cursor-pointer hover:scale-[1.01] transition"
+            className="bg-orange-50 rounded-lg shadow-lg h-100 relative overflow-hidden cursor-pointer hover:scale-[1.01] transition"
             onClick={handleCardClick} 
         >
-            <p className="p-4 text-right">
-                <span className="text-3xl"> {projecttitle} </span>
-                <span className="text-5xl font-semibold text-right"> {projectnr}</span>
+            <p className="p-6 me-2 text-right">
+                <span className="text-3xl font-semibold"> {projecttitle} </span>
+                {/* <span className="text-5xl font-semibold text-right"> {projectnr}</span> */}
             </p>
-            <img src={projectimage} alt="projectImage" className="object-cover h-full w-auto"></img>
+            <img src={projectimage} alt="projectImage" className="object-contain h-full w-auto"></img>
             <CornerBorder/>
         </div>
     );
