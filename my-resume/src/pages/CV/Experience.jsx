@@ -28,8 +28,8 @@ export default function Experience(){
                         drikke. Sørger for renhold og vedlikehold av butikken og området rundt. 
                     </p>
                 </div>
-                <CornerBorder/>
             </div>
+            <CornerBorder/>
         </div>
         </>
     )
