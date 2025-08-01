@@ -1,9 +1,9 @@
-import CornerBorder from '../CornerBorder.jsx'
+import CornerBorder from '../../components/CornerBorder.jsx'
 
 
 export default function Header(){
     return (
-        <div className="relative bg-yellow-200 p-10 rounded-xl">
+        <div className="relative bg-amber-200 p-10 rounded-xl">
             <div className="">
                 <p className="text-3xl text-center font-semibold mb-5">Alliana Shari Nazareno</p>
                 <InfoAboutMe text = "14. mai 2004 "/>

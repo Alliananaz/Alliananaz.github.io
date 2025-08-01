@@ -1,5 +1,5 @@
 import Title from './Title.jsx'
-import CornerBorder from '../CornerBorder.jsx'
+import CornerBorder from '../../components/CornerBorder.jsx'
 
 export default function Referance(){
     return (

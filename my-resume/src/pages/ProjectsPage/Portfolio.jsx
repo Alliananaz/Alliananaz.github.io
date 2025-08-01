@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRef } from "react";
-import milkcarton_tn from "./assets/images/milkcarton_tn.png"
-import dino_tn from "./assets/images/dino_tn.png"
-import xhotel_tn from "./assets/images/xhotel_tn.png"
-import solmate_tn from "./assets/images/solmate2_tn.png"
-import CornerBorder from "./CornerBorder";
-import BackButton from "./BackButton";
+import milkcarton_tn from "../../assets/images/milkcarton_tn.png"
+import dino_tn from "../../assets/images/dino_tn.png"
+import xhotel_tn from "../../assets/images/xhotel_tn.png"
+import solmate_tn from "../../assets/images/solmate2_tn.png"
+import CornerBorder from "../../components/CornerBorder";
+import BackButton from "../../components/BackButton";
 
 export default function Portfolio(){
     const [showDescription, setShowDescription] = useState(null);
