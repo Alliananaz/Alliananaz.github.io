@@ -6,6 +6,7 @@ import Up from "../assets/camerabuttons/Up.svg";
 import Left from "../assets/camerabuttons/Left.svg";
 import Right from "../assets/camerabuttons/Right.svg";
 import Background from "../assets/camerabuttons/Background.svg";
+import CornerBorder from "../components/CornerBorder";
 
 function Home() {
     const [selected, setSelected] = useState(0);
@@ -52,7 +53,7 @@ function Home() {
 
     const CameraButton = () => {
         return (
-            <div className={`relative size-32 ml-5 mt-30`}>
+            <div className={`relative size-32 ml-5 mt-6`}>
                 {/* Middle */}
                 <button
                     className="absolute w-[40%] h-[40%] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center bg-transparent"
@@ -106,9 +107,9 @@ function Home() {
 
     return (
         <div className="flex w-full h-screen justify-center items-center">
-            <div className="bg-zinc-300 p-8 flex flex-row rounded-xl gap-2">
-                <div className="flex justify-center items-center bg-black aspect-[4/3] p-2">
-                    <div className="flex flex-col justify-center items-center bg-white p-14">
+            <div className="bg-zinc-300 p-8 flex flex-row rounded-2xl gap-2">
+                <div className="flex flex-col justify-center items-center bg-white p-10 border-4">
+                    <div className="relative p-10">
                         <p className="mb-12 text-3xl text-center">Welcome to my website:p</p>
                         <p className="text-xl text-center font-semibold">Please select a filter</p>
                         <ul className="list-none text-center text-xl/10 mt-4">
@@ -131,9 +132,20 @@ function Home() {
                                 </Link>
                             </li>
                         </ul>
+                        <CornerBorder/>
                     </div>
                 </div>
-                <CameraButton />
+                <div className="flex flex-col">
+                    <div className="flex flex-row gap-8 ml-5 mt-20">
+                        <div className="w-12 h-12 bg-stone-950 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                            MODE
+                        </div>
+                        <div className="w-12 h-12 bg-stone-950 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"></div>
+                        </div>
+                    </div>
+                    <CameraButton />
+                </div>
             </div>
         </div>
     );
