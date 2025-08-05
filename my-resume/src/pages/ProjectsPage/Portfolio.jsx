@@ -7,6 +7,7 @@ import solmate_tn from "../../assets/images/solmate2_tn.png"
 import CornerBorder from "../../components/CornerBorder";
 import BackButton from "../../components/BackButton";
 
+
 export default function Portfolio(){
     const [showDescription, setShowDescription] = useState(null);
     const descriptionRef = useRef(null);
@@ -35,7 +36,6 @@ export default function Portfolio(){
                         </footer>
                     </div>
                     
-
                     <div className="grid md:grid-cols-2 gap-2">
                         <div className="flex flex-col gap-12 p-4">
                             <ProjectCard
@@ -49,7 +49,7 @@ export default function Portfolio(){
                                         <div>
                                             <img src={solmate_tn} alt="projectImage" className="w-full max-w-md h-auto object-contain mx-auto rounded-xl"></img>
                                         </div>
-                                        <div className="space-y-4">
+                                        <div className="space-y-4 mt-6">
                                             <p>'SolMate' is an app my team and I developed as a group project for the course IN2000 - Software Engineering with project work. 
                                                 Developed using Kotlin and Jetpack Compose, the app estimates how much electricity solar panels can potencially produce on users' property, and
                                                 that can help them assess whether an investment in solar panels will be profitable. 
@@ -91,9 +91,6 @@ export default function Portfolio(){
                                     </div>
                                 }
                             />
-                        </div>
-
-                        <div className="flex flex-col gap-12 p-4 md:mt-30">
                             <ProjectCard
                                 projectnr = "03"
                                 projectyear = "2022 - IT2 course assignment"
@@ -102,6 +99,9 @@ export default function Portfolio(){
                                 onClick = {handleClick}
                                 description = "Dino-Game is a game I developed as a part of an assignemnt for my highschool IT2 course, inspired by Google's iconic dinosaur game. This assignment was coded using Python and Pygame, and was programmed using Thonny."
                             />
+                        </div>
+
+                        <div className="flex flex-col gap-12 p-4 md:mt-30">
                             <ProjectCard
                                 projectnr = "04"
                                 projectyear = "2021 - IT1 course assignment"
@@ -109,6 +109,22 @@ export default function Portfolio(){
                                 projectimage = {xhotel_tn}
                                 onClick = {handleClick}
                                 description = "'X Hotel is a website I developed as an assignment for my highschool IT1 course. This assignment was coded in Visual Studio Code, using HTML and CSS. The code to the website is on my GitHub under XXX."
+                            />
+                            <ProjectCard
+                                projectnr = "05"
+                                projectyear = "2025 - Summer project"
+                                projecttitle = "This Website"
+                                projectimage= "/ANlogo.png"
+                                onClick = {handleClick}
+                                description = {
+                                    <div>
+                                        <div>
+                                            <img src="/ANlogo.png" alt="projectImage" className="w-full max-w-md object-contain mx-auto rounded-xl"></img>
+                                        </div>
+                                        <p className="mt-6"> papoi
+                                        </p>
+                                    </div>
+                                }
                             />
                             
                         </div>
