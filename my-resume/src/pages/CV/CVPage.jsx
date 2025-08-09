@@ -11,7 +11,7 @@ export default function CVPage() {
       <div className='relative min-h-screen '>
         <BackButton/>
         <div className='min-h-screen flex justify-center'> 
-          <div className='w-full max-w-2xl my-10 flex flex-col space-y-10'> 
+          <div className='w-full max-w-2xl my-10 p-4 flex flex-col space-y-10'> 
             <Header/>
             <Experience/>
             <Education/> 

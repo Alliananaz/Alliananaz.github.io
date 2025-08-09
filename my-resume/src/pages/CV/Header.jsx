@@ -9,9 +9,9 @@ export default function Header(){
                 <InfoAboutMe text = "14. mai 2004 "/>
                 <InfoAboutMe text = "+47 465 37 422" />
                 <InfoAboutMe text = "alliana.nazareno@gmail.com" />
-                {/* <p> 
-                    <a href="www.linkedin.com/in/alliana-shari-nazareno-765276329" class="text-red-600 ms-14 hover:underline"> LinkedIn </a>
-                </p> */}
+                <InfoAboutMe text ={ 
+                    <a href="www.linkedin.com/in/alliana-shari-nazareno-765276329" class="text-amber-700 hover:underline"> LinkedIn </a>
+                }/>
                 <CornerBorder/>
             </div>
         </div>

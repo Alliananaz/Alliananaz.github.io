@@ -6,7 +6,6 @@ import CornerBorder from '../../components/CornerBorder.jsx'
 
 export default function Experience(){
     return (
-        <>
         <div className='relative p-5 sm:p-10 rounded-xl shadow-lg'> 
             <Title text="ARBEIDSERFARING" />
             <div className='p-5 space-y-8'>
@@ -31,7 +30,6 @@ export default function Experience(){
             </div>
             <CornerBorder/>
         </div>
-        </>
     )
 }
 

@@ -1,11 +1,9 @@
 export default function BackButton(){
     return (
-        <>
-        <div className='p-2 mt-5 ms-5'>
-            <button class="hover:not-focus:bg-yellow-300 border outline-2 outline-offset-2">
-                Back
-            </button>
-        </div>
-        </>
+        <button class="p-2 mt-5 ms-5 border outline-2 outline-offset-2"
+            onClick={() => {window.location.href = "/";}}
+        >
+            Back
+        </button>
     )
 }
