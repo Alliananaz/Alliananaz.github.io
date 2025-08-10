@@ -11,7 +11,7 @@ export default function Experience(){
             <div className='p-5 space-y-8'>
                 <div className=''>
                     <ExperienceDate text= "08.2023 - Nå" />
-                    <Place text = "Sabi Sushi Fornebu (Servitør tilkallings-/ekstrahjelp)" />
+                    <Place text = "Sabi Sushi Fornebu og Storo (Servitør tilkallings-/ekstrahjelp)" />
                     <p className=''>
                         Arbeidsbeskrivelse: Tar imot bestillinger og serverer mat og drikke med fokus på god
                         kundeservice. Pakker og organiserer takeaway-bestillinger for rask og riktig utlevering.

@@ -14,30 +14,28 @@ export default function Other(){
                     <p> Norsk, engelsk og tagalog (flytende muntlig og skriftlig) </p>
                 </div>
                 <div className=''>
-                    <OtherHeading text= "Programmeringsspråk" />
+                    <OtherHeading text= "Programmeringsspråk / Rammeverk" />
 
-                    <ul className="list-none space-y-4 text-base">
+                    <ul className="list-none text-base">
                         <li className="relative pl-10 before:content-['ᯓ★'] before:absolute before:left-0 ">
-                            Python (Erfaring fra programfag IT2 på Stabekk videregående
-                            og kurset IN1000 - Introduksjon til objektorientert
-                            programmering på Universitet i Oslo)
+                            Python 
                         </li>
                         <li className="relative pl-10 before:content-['✿'] before:absolute before:left-0 ">
-                            Java (Erfaring fra kurset IN1010 - Objektorientert
-                            programmering på Universitet i Oslo)    
+                            Java    
                         </li>
                         <li className="relative pl-10 before:content-['•ᴗ•'] before:absolute before:left-0 ">
-                            HTML og CSS (Erfaring fra programfag IT1 på Stabekk
-                            videregående) 
+                            HTML og CSS 
+                        </li>
+                        <li className="relative pl-10 before:content-['•ᴗ•'] before:absolute before:left-0 ">
+                            React
                         </li>
                     </ul>
                 </div>
                 <div className=''>
                     <OtherHeading text= "Verktøy" />
-                    <p> Figma, Canva og Tinkercad (Erfaring fra kursene IN1050 -
-                        Introduksjon til design, bruk, interaksjon og IN1060 -
-                        Bruksorientert design på Universitet i Oslo) 
-                    </p>
+                    <p>Figma, Canva og Tinkercad</p>
+                    <p>Visual Studio Code</p>
+                    <p>Android Studio</p>
                 </div>
             </div>
             <CornerBorder/>
