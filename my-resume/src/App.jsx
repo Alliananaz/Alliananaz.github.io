@@ -16,8 +16,7 @@ import CVPage from './pages/CV/CVPage.jsx'
 import Portfolio from './pages/ProjectsPage/Portfolio.jsx'
 
 
-
-export default function App() {
+function App() {
   return (
     <>
       <Router>
@@ -27,21 +26,8 @@ export default function App() {
           <Route path="/resume" element = {<CVPage/>}></Route>
         </Routes>
       </Router>
-
-      {/* <Portfolio/> */}
-      
-      {/* <CVPage/> */}
-      {/* <MainPage/> */}
-
-      {/* <div className='relative min-h-screen '>
-        
-        <div className='min-h-screen flex justify-center'> 
-          <div className='w-full max-w-3xl my-10 flex flex-col space-y-10'> 
-            <Forside/>
-          </div>
-        </div>
-      </div> */}
-      
     </>
   )
 }
+
+export default App
