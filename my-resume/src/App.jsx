@@ -10,7 +10,7 @@ import './App.css'
 // import Portfolio from './pages/ProjectsPage/Portfolio.jsx'
 // import CVPage from './pages/CV/CVPage.js'
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage.jsx'
 import CVPage from './pages/CV/CVPage.jsx'
 import Portfolio from './pages/ProjectsPage/Portfolio.jsx'
@@ -18,15 +18,11 @@ import Portfolio from './pages/ProjectsPage/Portfolio.jsx'
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element = {<MainPage/>}></Route>
-          <Route path="/projects" element = {<Portfolio/>}></Route>
-          <Route path="/resume" element = {<CVPage/>}></Route>
-        </Routes>
-      </Router>
-    </>
+    <Routes>
+      <Route path="/" element = {<MainPage/>}></Route>
+      <Route path="/projects" element = {<Portfolio/>}></Route>
+      <Route path="/resume" element = {<CVPage/>}></Route>
+    </Routes>
   )
 }
 

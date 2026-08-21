@@ -1,154 +1,232 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import Middle from "../assets/camerabuttons/Middle.svg";
-import Down from "../assets/camerabuttons/Down.svg";
-import Up from "../assets/camerabuttons/Up.svg";
-import Left from "../assets/camerabuttons/Left.svg";
-import Right from "../assets/camerabuttons/Right.svg";
-import Background from "../assets/camerabuttons/Background.svg";
-import CornerBorder from "../components/CornerBorder";
+import { useNavigate } from "react-router-dom";
+import "./MainPage.css";
+
+const MENU = [
+  { label: "HOME", path: "/" },
+  { label: "PROJECTS", path: "/projects" },
+  { label: "RESUME", path: "/resume" },
+];
 
 function Home() {
-    const [selected, setSelected] = useState(0);
-    const selectedRef = useRef(selected);
-    const nLinks = 3;
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState(0);
+  // Persist the light/dark choice so it survives navigating to other pages and back.
+  const [light, setLight] = useState(() => localStorage.getItem("camera-theme") === "light");
+  const [recording, setRecording] = useState(false);
 
-    useEffect(() => {
-        selectedRef.current = selected;
-    }, [selected]);
+  useEffect(() => {
+    localStorage.setItem("camera-theme", light ? "light" : "dark");
+  }, [light]);
 
-    const pressDown = () => {
-        setSelected((prev) => (prev + 1) % nLinks);
+  // Keep the latest selection available inside the keydown listener.
+  const selectedRef = useRef(selected);
+  useEffect(() => {
+    selectedRef.current = selected;
+  }, [selected]);
+
+  const moveBack = () => setSelected((prev) => (prev - 1 + MENU.length) % MENU.length);
+  const moveForward = () => setSelected((prev) => (prev + 1) % MENU.length);
+  const selectItem = (index = selectedRef.current) => navigate(MENU[index].path);
+
+  const toggleTheme = () => setLight((prev) => !prev);
+  const toggleRecording = () => setRecording((prev) => !prev);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.key) {
+        case "ArrowUp":
+        case "ArrowLeft":
+          event.preventDefault();
+          moveBack();
+          break;
+        case "ArrowDown":
+        case "ArrowRight":
+          event.preventDefault();
+          moveForward();
+          break;
+        case "Enter":
+          event.preventDefault();
+          selectItem(selectedRef.current);
+          break;
+        default:
+          break;
+      }
     };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const pressUp = () => {
-        setSelected((prev) => (prev === 0 ? nLinks - 1 : prev - 1));
-    };
+  return (
+    <div className={`cam-stage${light ? " light" : ""}`}>
+      <div className={`cam-body${recording ? " recording" : ""}`}>
+        {/* ---------------- LEFT COLUMN — LCD ---------------- */}
+        <section className="cam-lcd">
+          <div className="lcd-labelrow">
+            <span>DSC-AN14</span>
+            <span className="lcd-pwr">
+              <span className="pwr-dot" aria-hidden="true" />
+              PWR
+            </span>
+          </div>
 
-    const pressOk = (index = selected) => {
-        const links = ["/projects", "/resume", "/"];
-        window.location.href = links[index];
-    };
+          <div className="lcd-bezel">
+            <div className="lcd-screen">
+              {/* HUD — top-left */}
+              <div className="hud hud-tl">
+                <span className="hud-badge">{light ? "LIGHT" : "DARK"}</span>
+                <span>F2.8 · 1/60 · ISO 400</span>
+              </div>
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === "Enter") {
-                pressOk(selectedRef.current);
-            }
-            if (event.key === "ArrowDown") {
-                const next = (selectedRef.current + 1) % nLinks;
-                setSelected(next);
-            }
-            if (event.key === "ArrowUp") {
-                const prev = selectedRef.current === 0 ? nLinks - 1 : selectedRef.current - 1;
-                setSelected(prev);
-            }
-        };
+              {/* HUD — top-right */}
+              <div className="hud hud-tr">
+                <span className="rec-dot" aria-hidden="true" />
+                <span className="rec-label">{recording ? "REC" : "STBY"}</span>
+              </div>
 
-        document.addEventListener("keydown", handleKeyDown);
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
+              {/* HUD — bottom-left */}
+              <div className="hud hud-bl">
+                <span>▲▼ SELECT · OK ENTER</span>
+              </div>
 
-    const CameraButton = () => {
-        return (
-            <div className={`relative size-32 ml-5 mt-6`}>
-                {/* Middle */}
-                <button
-                    className="absolute w-[40%] h-[40%] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center bg-transparent"
-                    onClick={() => pressOk()}
-                >
-                    <img src={Middle} alt="Middle" className="absolute w-full h-full z-0" />
-                    <span
-                        className={`relative text-white text-xl font-bold z-10 leading-none`}
-                    >
-                        OK
+              {/* HUD — bottom-right */}
+              <div className="hud hud-br">
+                <span className="signal" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <span className="battery" aria-hidden="true">
+                  <span className="battery-fill" />
+                </span>
+              </div>
+
+              {/* Menu */}
+              <nav className="lcd-menu" aria-label="Main navigation">
+                {MENU.map((item, index) => (
+                  <button
+                    key={item.path}
+                    type="button"
+                    className={`menu-item${selected === index ? " selected" : ""}`}
+                    aria-current={selected === index ? "true" : undefined}
+                    onMouseEnter={() => setSelected(index)}
+                    onClick={() => selectItem(index)}
+                  >
+                    <span className="caret" aria-hidden="true">
+                      ▸
                     </span>
-                </button>
+                    <span>{item.label}</span>
+                  </button>
+                ))}
+              </nav>
 
-                {/* Up */}
-                <button
-                    className="absolute top-0 left-[50%] -translate-x-1/2 w-[70.8%] h-[34.2%] bg-transparent"
-                    onClick={pressUp}
-                >
-                    <img src={Up} alt="Up" />
-                </button>
-
-                {/* Down */}
-                <button
-                    className="absolute bottom-0 left-[50.5%] -translate-x-1/2 w-[72%] h-[34.2%] bg-transparent"
-                    onClick={pressDown}
-                >
-                    <img src={Down} alt="Down" />
-                </button>
-
-                {/* Left */}
-                <button
-                    className="absolute left-[-10%] top-1/2 -translate-y-1/2 w-[50%] h-[55%] bg-transparent"
-                    onClick={pressUp}
-                >
-                    <img src={Left} alt="Left" />
-                </button>
-
-                {/* Right */}
-                <button
-                    className="absolute left-[60.8%] top-1/2 -translate-y-1/2 w-[50%] h-[55%] bg-transparent"
-                    onClick={pressDown}
-                >
-                    <img src={Right} alt="Right" />
-                </button>
-
-                {/* Background */}
-                <img src={Background} alt="ButtonBackground" />
+              <div className="scanlines" aria-hidden="true" />
             </div>
-        );
-    };
+          </div>
 
-    return (
-        <div className="flex w-full h-screen justify-center items-center">
-            <div className="bg-zinc-300 p-8 flex flex-row rounded-2xl gap-2">
-                <div className="flex flex-col justify-center items-center bg-white p-10 border-4">
-                    <div className="relative p-10">
-                        <p className="mb-12 text-3xl text-center">Welcome to my website:p</p>
-                        <p className="text-xl text-center font-semibold">Please select a filter</p>
-                        <ul className="list-none text-center text-xl/10 mt-4">
-                            <li>
-                                {selected === 0 && <span>&gt;</span>}
-                                <Link to="/projects" className="text-amber-300 hover:text-amber-700" onMouseEnter={() => { setSelected(0) }}>
-                                    Projects
-                                </Link>
-                            </li>
-                            <li>
-                                {selected === 1 && <span>&gt;</span>}
-                                <Link to="/resume" className="text-amber-300 hover:text-amber-700" onMouseEnter={() => { setSelected(1) }}>
-                                    Resume
-                                </Link>
-                            </li>
-                            <li>
-                                {selected === 2 && <span>&gt;</span>}
-                                <Link to="/" className="text-amber-300 hover:text-amber-700" onMouseEnter={() => { setSelected(2) }}>
-                                    Home
-                                </Link>
-                            </li>
-                        </ul>
-                        <CornerBorder/>
-                    </div>
-                </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-row gap-8 ml-5 mt-20">
-                        <div className="w-12 h-12 bg-stone-950 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                            MODE
-                        </div>
-                        <div className="w-12 h-12 bg-stone-950 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"></div>
-                        </div>
-                    </div>
-                    <CameraButton />
-                </div>
+          <div className="lcd-footer">
+            <span className="ticks" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+              <i />
+            </span>
+            <span>4:3 · FINE</span>
+          </div>
+        </section>
+
+        {/* ---------------- RIGHT COLUMN — controls ---------------- */}
+        <section className="cam-controls">
+          <div className="ctrl-toprow">
+            <span>MENU</span>
+            <span>DISP</span>
+          </div>
+
+          {/* MODE / MOVIE */}
+          <div className="ctrl-buttons">
+            <div className="btn-col">
+              <button
+                type="button"
+                className="round-btn mode-btn"
+                onClick={toggleTheme}
+                aria-pressed={light}
+                aria-label={`Switch to ${light ? "dark" : "light"} mode`}
+              >
+                MODE
+              </button>
+              <span className="caption">{light ? "LIGHT" : "DARK"}</span>
             </div>
-        </div>
-    );
+
+            <div className="btn-col">
+              <button
+                type="button"
+                className="round-btn movie-btn"
+                onClick={toggleRecording}
+                aria-pressed={recording}
+                aria-label={recording ? "Stop recording" : "Start recording"}
+              >
+                <span className="movie-dot" aria-hidden="true" />
+              </button>
+              <span className="caption">MOVIE</span>
+            </div>
+          </div>
+
+          {/* D-pad */}
+          <div className="dpad">
+            <div className="dpad-grid">
+              <button
+                type="button"
+                className="dpad-btn dpad-up"
+                onClick={moveBack}
+                aria-label="Previous menu item"
+              >
+                ▲
+              </button>
+              <button
+                type="button"
+                className="dpad-btn dpad-left"
+                onClick={moveBack}
+                aria-label="Previous menu item"
+              >
+                ◀
+              </button>
+              <button
+                type="button"
+                className="dpad-btn dpad-right"
+                onClick={moveForward}
+                aria-label="Next menu item"
+              >
+                ▶
+              </button>
+              <button
+                type="button"
+                className="dpad-btn dpad-down"
+                onClick={moveForward}
+                aria-label="Next menu item"
+              >
+                ▼
+              </button>
+            </div>
+            <button
+              type="button"
+              className="ok-btn"
+              onClick={() => selectItem()}
+              aria-label={`Open ${MENU[selected].label}`}
+            >
+              OK
+            </button>
+          </div>
+
+          {/* Bottom */}
+          <div className="ctrl-bottom">
+            <span className="ctrl-bar" aria-hidden="true" />
+            <span>DELETE / PLAY</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 }
 
 export default Home;
