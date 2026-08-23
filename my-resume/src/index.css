@@ -5,6 +5,74 @@
 @theme {
   --font-dm: "DM Mono", ui-monospace, SFMono-Regular, monospace;
   --font-cond: "Barlow Condensed", ui-sans-serif, sans-serif;
+
+  /* CV / Resume page — 35mm negative strip on a light table.
+     (Tailwind v4 reads tokens from here, not tailwind.config.js, which
+     the v4 vite plugin does not auto-load.) */
+  --font-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-film: #24251f;
+  --color-sprocket: #f1f2ea;
+  --color-paper: #fdfdfb;
+
+  --color-ink: #3f3f37;
+  --color-ink-body: #55554b;
+  --color-ink-mute: #8a8a7c;
+  --color-ink-dim: #9a9a8c;
+
+  --color-amber: #d9a441;
+  --color-amber-text: #b4842c;
+  --color-amber-deep: #8a6a1f;
+  --color-amber-dot: #c9a44a;
+
+  --color-chrome: #8a8d93;
+  --color-chrome-dark: #7e8188;
+  --color-chrome-light: #9a9da3;
+
+  --color-edge: #a8aa9c;
+
+  --shadow-strip: 0 8px 18px rgba(20, 22, 28, 0.16);
+  --shadow-card: 0 10px 22px rgba(20, 22, 28, 0.08);
+
+  --ease-reveal: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* `bg-light-table` — v4 has no theme namespace that turns a gradient into a
+   bg-* utility, so define it explicitly. */
+@utility bg-light-table {
+  background-image: radial-gradient(
+    90% 60% at 50% 20%,
+    #fdfdfb 0%,
+    #eceef0 55%,
+    #d7dade 100%
+  );
+}
+
+/* CV dark mode — mirrors the camera home page toggle (localStorage
+   `camera-theme`). The film strip itself (film, sprocket perforations, the lit
+   frame, amber accents) is a physical object and stays put; only the light
+   table, the paper cards, and the reading text invert. Because every color
+   utility on the page compiles to `var(--color-*)`, redefining the tokens on
+   this wrapper re-themes the whole subtree. Unlayered, so it outranks the
+   `bg-light-table` utility on the same element. */
+.cv-dark {
+  --color-paper: #1e1f25;
+  --color-ink: #e7e7de;
+  --color-ink-body: #c9c9bf;
+  --color-ink-mute: #98988d;
+  --color-ink-dim: #85857a;
+  --color-chrome: #9fa2a8;
+  --color-chrome-dark: #b0b3b9;
+  --color-chrome-light: #b0b3b9;
+  --color-amber-text: #cf9f45;
+  --color-amber-deep: #caa24a;
+
+  background-image: radial-gradient(
+    90% 60% at 50% 20%,
+    #202128 0%,
+    #17181d 55%,
+    #0f1013 100%
+  );
 }
 
 /* These global element styles live in @layer base so Tailwind utilities
