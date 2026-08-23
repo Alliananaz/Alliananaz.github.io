@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4 is pulled in once via `@import "tailwindcss"` in index.css.
+   The old v3 @tailwind base/components/utilities directives are gone. */
 
 body, html, #root {
   margin: 0 auto;
