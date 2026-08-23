@@ -215,12 +215,21 @@ function Home() {
                         "font-cond text-[calc(42*var(--u))] leading-[1.05] font-semibold tracking-[.06em] uppercase " +
                         (isSelected
                           ? light
-                            ? "bg-[rgba(240,180,41,.22)] text-[#b5790a]"
-                            : "bg-[rgba(240,180,41,.12)] text-[#f0b429]"
-                          : light
-                            ? "text-black/60"
-                            : "text-white/60")
+                            ? "bg-[rgba(240,180,41,.22)]"
+                            : "bg-[rgba(240,180,41,.12)]"
+                          : "")
                       }
+                      // Inline color beats the shared `text-inherit` in BTN, which
+                      // otherwise leaves the text near-white and unreadable in light mode.
+                      style={{
+                        color: isSelected
+                          ? light
+                            ? "#b5790a"
+                            : "#f0b429"
+                          : light
+                            ? "#1a1c1f"
+                            : "#e8e9ec",
+                      }}
                       aria-current={isSelected ? "true" : undefined}
                       onMouseEnter={() => setSelected(index)}
                       onClick={() => selectItem(index)}
