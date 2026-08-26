@@ -40,65 +40,6 @@ const SECTIONS = [
     ],
   },
   {
-    title: "Utdanning",
-    span: "2023 — 2028",
-    entries: [
-      {
-        title: "Master i Digitalisering i helsesektoren: Informatikk",
-        sub: "Universitetet i Oslo",
-        when: "Aug. 2026 – Jun. 2028",
-        tag: "MASTER",
-        bullets: [],
-      },
-      {
-        title: "Bachelor i Informatikk: design, bruk og interaksjon",
-        sub: "Universitetet i Oslo",
-        when: "Aug. 2023 – Jun. 2026",
-        tag: "BACHELOR",
-        bullets: [
-          "Tverrfaglig studium i skjæringspunktet mellom design, programmering og brukerorientert utvikling.",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Arbeidserfaring",
-    span: "2023 — NÅ",
-    entries: [
-      {
-        title: "Gruppelærer / Retter",
-        sub: "Universitetet i Oslo",
-        when: "Aug. 2026 – Nå",
-        tag: "OSLO",
-        bullets: [
-          "Holder gruppetimer i IN1020 – Introduksjon til datateknologi.",
-          "Forklarer pensum fra forelesningene og hjelper med obligatoriske oppgaver.",
-          "Retter studentinnleveringer og gir konstruktiv tilbakemelding.",
-        ],
-      },
-      {
-        title: "Gruppelærer / Retter",
-        sub: "Universitetet i Oslo",
-        when: "Jan. 2026 – Mai 2026",
-        tag: "OSLO",
-        bullets: [
-          "Holdt gruppetimer i IN2000 – Software Engineering.",
-          "Veiledet 8–10 prosjektteam gjennom semesteret.",
-          "Rettet studentinnleveringer og ga konstruktiv tilbakemelding.",
-        ],
-      },
-      {
-        title: "Servitør (ekstrahjelp)",
-        sub: "Sabi Sushi — Fornebu og Storo",
-        when: "Aug. 2023 – Nå",
-        tag: "FORNEBU · STORO",
-        bullets: [
-          "Tar imot bestillinger, servering, betaling og kasseoppgjør med fokus på god kundeservice.",
-        ],
-      },
-    ],
-  },
-  {
     title: "Prosjekter",
     span: "2021 — 2025",
     entries: [
@@ -145,6 +86,65 @@ const SECTIONS = [
         tag: "IT1",
         bullets: [
           "Nettside utviklet som oppgave i IT1, kodet i Visual Studio Code med HTML og CSS.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Arbeidserfaring",
+    span: "2023 — NÅ",
+    entries: [
+      {
+        title: "Gruppelærer / Retter",
+        sub: "Universitetet i Oslo",
+        when: "Aug. 2026 – Nå",
+        tag: "OSLO",
+        bullets: [
+          "Holder gruppetimer i IN1020 – Introduksjon til datateknologi.",
+          "Forklarer pensum fra forelesningene og hjelper med obligatoriske oppgaver.",
+          "Retter studentinnleveringer og gir konstruktiv tilbakemelding.",
+        ],
+      },
+      {
+        title: "Gruppelærer / Retter",
+        sub: "Universitetet i Oslo",
+        when: "Jan. 2026 – Mai 2026",
+        tag: "OSLO",
+        bullets: [
+          "Holdt gruppetimer i IN2000 – Software Engineering.",
+          "Veiledet 8–10 prosjektteam gjennom semesteret.",
+          "Rettet studentinnleveringer og ga konstruktiv tilbakemelding.",
+        ],
+      },
+      {
+        title: "Servitør (ekstrahjelp)",
+        sub: "Sabi Sushi — Fornebu og Storo",
+        when: "Aug. 2023 – Nå",
+        tag: "FORNEBU · STORO",
+        bullets: [
+          "Tar imot bestillinger, servering, betaling og kasseoppgjør med fokus på god kundeservice.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Utdanning",
+    span: "2023 — 2028",
+    entries: [
+      {
+        title: "Master i Digitalisering i helsesektoren: Informatikk",
+        sub: "Universitetet i Oslo",
+        when: "Aug. 2026 – Jun. 2028",
+        tag: "MASTER",
+        bullets: [],
+      },
+      {
+        title: "Bachelor i Informatikk: design, bruk og interaksjon",
+        sub: "Universitetet i Oslo",
+        when: "Aug. 2023 – Jun. 2026",
+        tag: "BACHELOR",
+        bullets: [
+          "Tverrfaglig studium i skjæringspunktet mellom design, programmering og brukerorientert utvikling.",
         ],
       },
     ],
@@ -207,10 +207,17 @@ export default function CVPage() {
   const [collapsed, setCollapsed] = useState(() => new Set());
 
   // Mirror the home page's light/dark choice (persisted under `camera-theme`),
-  // so the roll matches whichever mode the camera panel was left in.
-  const [dark] = useState(
+  // so the roll matches whichever mode the camera panel was left in — and write
+  // the choice back so toggling here also carries over to the home page.
+  const [dark, setDark] = useState(
     () => localStorage.getItem("camera-theme") !== "light"
   );
+
+  useEffect(() => {
+    localStorage.setItem("camera-theme", dark ? "dark" : "light");
+  }, [dark]);
+
+  const toggleTheme = useCallback(() => setDark((prev) => !prev), []);
 
   const sectionCount = SECTIONS.length;
   const total = SECTIONS.reduce((n, s) => n + s.entries.length, 0);
@@ -252,7 +259,7 @@ export default function CVPage() {
         <header className="flex items-end justify-between gap-6">
           <div className="flex flex-col gap-1.5">
             <span className="text-[10px] tracking-[.22em] text-chrome">
-              LIGHT TABLE · ROLL 01 · CV 2026
+            CV 2026
             </span>
             <h1 className="text-3xl leading-none tracking-[.05em] uppercase">
               Alliana Shari Nazareno
@@ -304,6 +311,15 @@ export default function CVPage() {
               }
             >
               HELE RULLEN
+            </button>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-pressed={dark}
+              aria-label={`Bytt til ${dark ? "lyst" : "mørkt"} modus`}
+              className="border border-ink/25 bg-paper/60 px-2.5 py-[5px] text-[11px] tracking-[.18em] text-chrome-dark transition-colors hover:border-amber/70 hover:text-amber-deep"
+            >
+              {dark ? "☀ LYS" : "☾ MØRK"}
             </button>
           </div>
         </header>
@@ -357,8 +373,7 @@ export default function CVPage() {
                     </div>
 
                     {/* Filler strip */}
-                    <div className="flex flex-1 items-center justify-between bg-sprocket/5 px-3.5 text-[10px] tracking-[.16em] text-edge">
-                      <span>{section.span}</span>
+                    <div className="flex flex-1 items-center justify-end bg-sprocket/5 px-3.5 text-[10px] tracking-[.16em] text-edge">
                       <span className="flex items-center gap-2.5">
                         <span>{section.entries.length} EXP</span>
                         <span
@@ -448,8 +463,8 @@ export default function CVPage() {
         </div>
 
         {/* ---------------- Footer ---------------- */}
-        <footer className="flex justify-between gap-4 text-[10px] tracking-[.22em] text-chrome-light">
-          <span>AN14 400 · SAFETY FILM · {edgeCode}</span>
+        <footer className="flex justify-between gap-4 text-[12px] tracking-[.22em] text-chrome-light">
+          <span>DSC-AN14 · {edgeCode}</span>
           <span>Referanser oppgis ved forespørsel</span>
         </footer>
       </div>
