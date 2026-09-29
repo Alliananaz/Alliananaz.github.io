@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import useCameraTheme from "../../hooks/useCameraTheme";
 
 /* ----------------------------------------------------------------------------
    CV content. Every count on the page (EXP badges, the footer total) is
@@ -10,13 +11,13 @@ import { Link } from "react-router-dom";
 ---------------------------------------------------------------------------- */
 const SECTIONS = [
   {
-    title: "Ferdigheter",
+    title: "Skills",
     span: "",
     entries: [
       {
         sub: "Python · Java · JavaScript/TypeScript · Kotlin",
         when: "",
-        tag: "KODE",
+        tag: "CODE",
         bullets: [],
       },
       {
@@ -28,19 +29,19 @@ const SECTIONS = [
       {
         sub: "VS Code · Android Studio · Thonny · Figma · Canva",
         when: "",
-        tag: "VERKTØY",
+        tag: "TOOLS",
         bullets: [],
       },
       {
-        sub: "Norsk · Engelsk · Filippinsk (Tagalog)",
+        sub: "Norwegian · English · Filipino (Tagalog)",
         when: "",
-        tag: "SPRÅK",
+        tag: "LANGUAGES",
         bullets: [],
       },
     ],
   },
   {
-    title: "Prosjekter",
+    title: "Projects",
     span: "2021 — 2025",
     entries: [
       {
@@ -49,16 +50,16 @@ const SECTIONS = [
         when: "2025",
         tag: "IN2000",
         bullets: [
-          "Utviklet Android-app i gruppeprosjekt (IN2000) som estimerer strømproduksjon fra solcellepaneler. Gjennomførte brukerintervjuer og -tester, og jobbet smidig med Kanban/Scrum.",
+          "Developed an Android app in a group project (IN2000) that estimates power production from solar panels. Conducted user interviews and tests, and worked agile with Kanban/Scrum.",
         ],
       },
       {
         title: "Alliananaz Website",
         sub: "React · JavaScript · HTML · Tailwind CSS · Claude Design · Claude Code",
         when: "2025",
-        tag: "EGET",
+        tag: "PERSONAL",
         bullets: [
-          "Designet og utviklet portefølje- og CV-nettside som egenprosjekt med gjennomgående kamera-/fototema. Publisert på GitHub.",
+          "Designed and developed a portfolio and CV website as a personal project, with a camera/photography theme throughout. Published on GitHub.",
         ],
       },
       {
@@ -67,7 +68,7 @@ const SECTIONS = [
         when: "2024",
         tag: "IN1060",
         bullets: [
-          "Designet og utviklet tangible prototype i team for IN1060 (tema «Av/På»). Artefaktet varsler brukere om lavt/tomt nivå på ulike melketyper via belyste ikoner, med sensorbasert vektmåling og nullstillingsfunksjoner.",
+          "Designed and developed a tangible prototype as a team for IN1060 (theme “On/Off”). The artefact alerts users to low or empty levels of different types of milk via lit icons, with sensor-based weight measurement and reset functions.",
         ],
       },
       {
@@ -76,7 +77,7 @@ const SECTIONS = [
         when: "2022",
         tag: "IT2",
         bullets: [
-          "Spill inspirert av Googles dinosaurspill, laget som oppgave i IT2 og programmert i Thonny.",
+          "Game inspired by Google's dinosaur game, made as an assignment in IT2 and programmed in Thonny.",
         ],
       },
       {
@@ -85,92 +86,92 @@ const SECTIONS = [
         when: "2021",
         tag: "IT1",
         bullets: [
-          "Nettside utviklet som oppgave i IT1, kodet i Visual Studio Code med HTML og CSS.",
+          "Website developed as an assignment in IT1, coded in Visual Studio Code with HTML and CSS.",
         ],
       },
     ],
   },
   {
-    title: "Arbeidserfaring",
-    span: "2023 — NÅ",
+    title: "Work Experience",
+    span: "2023 — NOW",
     entries: [
       {
-        title: "Gruppelærer / Retter",
-        sub: "Universitetet i Oslo",
-        when: "Aug. 2026 – Nå",
+        title: "Teaching Assistant / Grader",
+        sub: "University of Oslo",
+        when: "Aug 2026 – Present",
         tag: "OSLO",
         bullets: [
-          "Holder gruppetimer i IN1020 – Introduksjon til datateknologi.",
-          "Forklarer pensum fra forelesningene og hjelper med obligatoriske oppgaver.",
-          "Retter studentinnleveringer og gir konstruktiv tilbakemelding.",
+          "Teaches seminar groups in IN1020 – Introduction to Computer Technology.",
+          "Explains course material from the lectures and helps with mandatory assignments.",
+          "Grades student submissions and gives constructive feedback.",
         ],
       },
       {
-        title: "Gruppelærer / Retter",
-        sub: "Universitetet i Oslo",
-        when: "Jan. 2026 – Mai 2026",
+        title: "Teaching Assistant / Grader",
+        sub: "University of Oslo",
+        when: "Jan 2026 – May 2026",
         tag: "OSLO",
         bullets: [
-          "Holdt gruppetimer i IN2000 – Software Engineering.",
-          "Veiledet 8–10 prosjektteam gjennom semesteret.",
-          "Rettet studentinnleveringer og ga konstruktiv tilbakemelding.",
+          "Taught seminar groups in IN2000 – Software Engineering.",
+          "Supervised 8–10 project teams throughout the semester.",
+          "Graded student submissions and gave constructive feedback.",
         ],
       },
       {
-        title: "Servitør (ekstrahjelp)",
-        sub: "Sabi Sushi — Fornebu og Storo",
-        when: "Aug. 2023 – Nå",
+        title: "Waiter (part-time)",
+        sub: "Sabi Sushi — Fornebu and Storo",
+        when: "Aug 2023 – Present",
         tag: "FORNEBU · STORO",
         bullets: [
-          "Tar imot bestillinger, servering, betaling og kasseoppgjør med fokus på god kundeservice.",
+          "Takes orders, serves, and handles payments and cash reconciliation with a focus on good customer service.",
         ],
       },
     ],
   },
   {
-    title: "Utdanning",
+    title: "Education",
     span: "2023 — 2028",
     entries: [
       {
-        title: "Master i Digitalisering i helsesektoren: Informatikk",
-        sub: "Universitetet i Oslo",
-        when: "Aug. 2026 – Jun. 2028",
-        tag: "MASTER",
+        title: "Master's in Digitalisation in the Health Sector: Informatics",
+        sub: "University of Oslo",
+        when: "Aug 2026 – Jun 2028",
+        tag: "MASTER'S",
         bullets: [],
       },
       {
-        title: "Bachelor i Informatikk: design, bruk og interaksjon",
-        sub: "Universitetet i Oslo",
-        when: "Aug. 2023 – Jun. 2026",
-        tag: "BACHELOR",
+        title: "Bachelor's in Informatics: Design, Use and Interaction",
+        sub: "University of Oslo",
+        when: "Aug 2023 – Jun 2026",
+        tag: "BACHELOR'S",
         bullets: [
-          "Tverrfaglig studium i skjæringspunktet mellom design, programmering og brukerorientert utvikling.",
+          "Interdisciplinary programme at the intersection of design, programming and user-oriented development.",
         ],
       },
     ],
   },
   {
-    title: "Verv og frivillighet",
+    title: "Positions & Volunteering",
     span: "2025 — 2026",
     entries: [
       {
-        title: "Styremedlem",
-        sub: "VIFI – Volleyballforening ved Institutt for Informatikk",
-        when: "Feb. – Jun. 2026",
+        title: "Board Member",
+        sub: "VIFI – Volleyball Club at the Department of Informatics",
+        when: "Feb – Jun 2026",
         tag: "OSLO",
         bullets: [],
       },
       {
-        title: "Frivillig",
-        sub: "JavaZone 2025 – logistikk og deltakerservice (Overflow)",
-        when: "Sep. 2025",
+        title: "Volunteer",
+        sub: "JavaZone 2025 – logistics and attendee services (Overflow)",
+        when: "Sep 2025",
         tag: "LILLESTRØM",
         bullets: [],
       },
       {
-        title: "Frivillig",
-        sub: "Jentedagen 2025 – omvisning og informasjon til deltakere",
-        when: "Aug. 2025",
+        title: "Volunteer",
+        sub: "Jentedagen 2025 – guided tours and information for participants",
+        when: "Aug 2025",
         tag: "OSLO",
         bullets: [],
       },
@@ -180,7 +181,7 @@ const SECTIONS = [
 
 /* Contact line — each item stays together as one non-breaking chip. */
 const CONTACT = [
-  { label: "14. mai 2004" },
+  { label: "14 May 2004" },
   { label: "+47 46537422", href: "tel:+4746537422" },
   { label: "alliana.nazareno@gmail.com", href: "mailto:alliana.nazareno@gmail.com" },
   { label: "GitHub", href: "https://github.com/alliananaz", external: true },
@@ -213,18 +214,8 @@ export default function CVPage() {
   // Track which sections are collapsed. Empty set = the whole roll is open.
   const [collapsed, setCollapsed] = useState(() => new Set());
 
-  // Mirror the home page's light/dark choice (persisted under `camera-theme`),
-  // so the roll matches whichever mode the camera panel was left in — and write
-  // the choice back so toggling here also carries over to the home page.
-  const [dark, setDark] = useState(
-    () => localStorage.getItem("camera-theme") !== "light"
-  );
-
-  useEffect(() => {
-    localStorage.setItem("camera-theme", dark ? "dark" : "light");
-  }, [dark]);
-
-  const toggleTheme = useCallback(() => setDark((prev) => !prev), []);
+  // Site-wide light/dark choice, shared with the home and Projects pages.
+  const [dark, toggleTheme] = useCameraTheme();
 
   const sectionCount = SECTIONS.length;
   const total = SECTIONS.reduce((n, s) => n + s.entries.length, 0);
@@ -252,12 +243,12 @@ export default function CVPage() {
 
   const edgeCode = allOpen
     ? `FULL ROLL · ${total} EXP`
-    : `${openCount}/${sectionCount} FRAMES ÅPNE`;
+    : `${openCount}/${sectionCount} FRAMES OPEN`;
 
   return (
     <div
       className={
-        (dark ? "cv-dark " : "") +
+        (dark ? "theme-dark " : "") +
         "flex min-h-dvh justify-center bg-light-table px-4 pt-10 pb-12 font-mono text-ink " +
         "sm:px-6 sm:pt-20 sm:pb-18 lg:pt-28"
       }
@@ -305,6 +296,9 @@ export default function CVPage() {
             <Link to="/" className={`${CTRL} border-ink/25 bg-paper/60 text-chrome-dark`}>
               ◀ HOME
             </Link>
+            <Link to="/projects" className={`${CTRL} border-ink/25 bg-paper/60 text-chrome-dark`}>
+              PROJECTS
+            </Link>
             <button
               type="button"
               onClick={reopenAll}
@@ -315,16 +309,16 @@ export default function CVPage() {
                   : " border-ink/25 bg-paper/60 text-chrome-dark")
               }
             >
-              HELE RULLEN
+              FULL ROLL
             </button>
             <button
               type="button"
               onClick={toggleTheme}
               aria-pressed={dark}
-              aria-label={`Bytt til ${dark ? "lyst" : "mørkt"} modus`}
+              aria-label={`Switch to ${dark ? "light" : "dark"} mode`}
               className={`${CTRL} border-ink/25 bg-paper/60 text-chrome-dark`}
             >
-              {dark ? "☀ LYS" : "☾ MØRK"}
+              {dark ? "☀ LIGHT" : "☾ DARK"}
             </button>
           </div>
         </header>
@@ -375,7 +369,7 @@ export default function CVPage() {
                         {frame}
                       </span>
                       {/* `break-words` is the floor: below ~360px a single long
-                          word like FERDIGHETER is wider than the frame, and
+                          word like EXPERIENCE is wider than the frame, and
                           without it the tail spills out over the dark filler
                           strip and becomes unreadable. */}
                       <span className="min-w-0 break-words text-[13px] tracking-[.06em] text-[#2e2f27] uppercase max-[359px]:text-[11px] sm:text-[16px] sm:tracking-[.08em]">
@@ -449,7 +443,7 @@ export default function CVPage() {
                               <p
                                 className={
                                   "text-[12px] tracking-[.04em] " +
-                                  // Title-less entries (e.g. Ferdigheter) lead with
+                                  // Title-less entries (e.g. Skills) lead with
                                   // the sub, so give it the title's ink color.
                                   (entry.title ? "text-ink-mute" : "text-ink")
                                 }
@@ -480,7 +474,7 @@ export default function CVPage() {
         {/* ---------------- Footer ---------------- */}
         <footer className="flex flex-col gap-1 text-[11px] tracking-[.16em] text-chrome-light sm:flex-row sm:justify-between sm:gap-4 sm:text-[12px] sm:tracking-[.22em]">
           <span>DSC-AN14 · {edgeCode}</span>
-          <span>Referanser oppgis ved forespørsel</span>
+          <span>References available upon request</span>
         </footer>
       </div>
     </div>

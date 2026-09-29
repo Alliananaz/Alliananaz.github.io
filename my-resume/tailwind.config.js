@@ -13,7 +13,15 @@ export default {
         amber:  { DEFAULT: '#d9a441', text: '#b4842c', deep: '#8a6a1f', dot: '#c9a44a' },
         chrome: { DEFAULT: '#8a8d93', dark: '#7e8188', light: '#9a9da3' },
         edge:   '#a8aa9c',
+        // Projects page
+        table:  '#dcdfe3',
+        paper2: '#f5f5ef',
+        frame:  '#3a3b33',
+        ink2:   '#45453d',
+        'amber-tx': '#a9822c',
+        slot:   '#e6e7dc',
       },
+      letterSpacing: { cap: '.18em', capw: '.22em', capn: '.12em' },
       fontFamily: {
         shadows: ['"Shadows Into Light"', 'cursive'],
         mono: ['"DM Mono"', 'ui-monospace', 'monospace'],
@@ -24,6 +32,8 @@ export default {
       boxShadow: {
         strip: '0 8px 18px rgba(20,22,28,.16)',
         card:  '0 10px 22px rgba(20,22,28,.08)',
+        'strip-lg': '0 10px 22px rgba(20,22,28,.18)',
+        print: '0 14px 30px rgba(20,22,28,.10)',
       },
       transitionTimingFunction: { reveal: 'cubic-bezier(.4,0,.2,1)' },
     },
