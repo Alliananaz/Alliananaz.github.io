@@ -7,13 +7,22 @@ const MENU = [
   { label: "RESUME", path: "/resume" },
 ];
 
-/* The camera is drawn against a fixed 980 x 630 design grid. `--u` is the
-   size of one design pixel: it shrinks to fit whichever viewport axis is
-   tightest and never grows past 1px, so the chassis keeps its exact
-   proportions on a phone instead of reflowing. Every dimension below is
-   calc(N * var(--u)); the few max(...) floors keep the smallest decorative
-   type from disappearing entirely at the smallest scales. */
-const UNIT = "[--u:min(1px,(100vw_-_24px)/980,(100dvh_-_24px)/630)]";
+/* The camera is drawn against a fixed design grid, and `--u` is the size of
+   one design pixel: it shrinks to fit whichever viewport axis is tightest and
+   never grows past 1px, so the chassis keeps its exact proportions instead of
+   reflowing. Every dimension below is calc(N * var(--u)); the few max(...)
+   floors keep the smallest decorative type from disappearing entirely.
+
+   There are two grids, because one landscape grid cannot serve both shapes:
+   fitting 980 x 630 into an upright phone leaves --u around 0.37, which is a
+   postage stamp in the middle of a tall empty screen. So an upright viewport
+   gets a 560 x 860 grid with the controls stacked under the LCD, which spends
+   the height it actually has; `wide:` (see index.css) switches back to the
+   side-by-side 980 x 630 chassis. Only the two grid numbers change — every
+   child still scales off the same --u. */
+const UNIT =
+  "[--u:min(1px,(100vw_-_24px)/560,(100dvh_-_24px)/860)] " +
+  "wide:[--u:min(1px,(100vw_-_24px)/980,(100dvh_-_24px)/630)]";
 
 /* Cancels the global <button> styling from index.css and gives every
    control the same focus ring. */
@@ -106,8 +115,9 @@ function Home() {
     >
       {/* Camera body — m-auto centers it on both axes */}
       <div
-        className="m-auto grid w-[calc(980*var(--u))] box-border shrink-0
-                   grid-cols-[1fr_calc(268*var(--u))] gap-[calc(28*var(--u))]
+        className="m-auto grid w-[calc(560*var(--u))] box-border shrink-0
+                   grid-cols-1 gap-[calc(28*var(--u))]
+                   wide:w-[calc(980*var(--u))] wide:grid-cols-[1fr_calc(268*var(--u))]
                    rounded-[calc(22*var(--u))] p-[calc(26*var(--u))]
                    bg-[linear-gradient(155deg,#d9dade_0%,#c3c5ca_46%,#adb0b6_100%)]
                    shadow-[0_calc(40*var(--u))_calc(90*var(--u))_rgba(0,0,0,.55),inset_0_1px_0_rgba(255,255,255,.7),inset_0_-2px_calc(6*var(--u))_rgba(0,0,0,.18)]"
@@ -277,11 +287,13 @@ function Home() {
 
         {/* ---------------- RIGHT COLUMN — controls ---------------- */}
         <section className="flex flex-col items-center gap-[calc(26*var(--u))]">
-          {/* Spacer keeps the controls in place now that the MENU/DISP row is gone */}
-          <div className="h-[calc(15*var(--u))]" aria-hidden="true" />
+          {/* Spacer keeps the controls in place now that the MENU/DISP row is
+              gone. Only needed beside the LCD — stacked, the grid gap already
+              separates them, so the nudges below are `wide:`-only too. */}
+          <div className="hidden h-[calc(15*var(--u))] wide:block" aria-hidden="true" />
 
           {/* MODE / MOVIE */}
-          <div className="grid translate-y-[calc(28*var(--u))] grid-cols-2 justify-items-center gap-[calc(32*var(--u))]">
+          <div className="grid grid-cols-2 justify-items-center gap-[calc(32*var(--u))] wide:translate-y-[calc(28*var(--u))]">
             <div className="flex flex-col items-center gap-[calc(8*var(--u))]">
               <button
                 type="button"
@@ -323,7 +335,7 @@ function Home() {
 
           {/* D-pad */}
           <div
-            className="relative size-[calc(196*var(--u))] translate-y-[calc(28*var(--u))] rounded-full
+            className="relative size-[calc(196*var(--u))] rounded-full wide:translate-y-[calc(28*var(--u))]
                        bg-[radial-gradient(120%_120%_at_30%_15%,#43454a_0%,#24262b_55%,#16181c_100%)]
                        shadow-[0_8px_18px_rgba(0,0,0,.45),inset_0_2px_0_rgba(255,255,255,.16),inset_0_-3px_8px_rgba(0,0,0,.5)]"
           >
@@ -379,7 +391,7 @@ function Home() {
           </div>
 
           {/* Bottom */}
-          <div className="flex translate-y-[calc(28*var(--u))] flex-col items-center gap-[calc(6*var(--u))] text-[max(6px,calc(9*var(--u)))] tracking-[.12em] text-[#7c7f85]">
+          <div className="flex flex-col items-center gap-[calc(6*var(--u))] text-[max(6px,calc(9*var(--u)))] tracking-[.12em] text-[#7c7f85] wide:translate-y-[calc(28*var(--u))]">
             <span
               className="h-[calc(6*var(--u))] w-[calc(44*var(--u))] rounded-[3px] bg-black/25"
               aria-hidden="true"

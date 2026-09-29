@@ -22,22 +22,21 @@ export default function Portfolio(){
     };
 
     return(
-        <div className="min-h-screen">
-            <BackButton/>
-            <div className="min-h-screen flex items-center justify-center md:p-6">
-                <div className="w-full max-w-3xl">
-                    <div className="mb-4">
-                        <h1 className="text-right text-neutral-800 font-semibold mb-4"> 
-                            <div>PROJECT</div>
-                            <div>PORTFOLIO</div>
-                        </h1>
-                        <footer className="text-right">
-                            <p>&copy; {new Date().getFullYear()} Made by Alliana:p </p>
-                        </footer>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-2">
-                        <div className="flex flex-col gap-12 p-4">
+        <div className="min-h-dvh px-4 py-5 sm:px-6 sm:py-8">
+            <div className="mx-auto w-full max-w-3xl">
+                <BackButton/>
+                <div className="mt-6 mb-4">
+                    <h1 className="text-right text-neutral-800 font-semibold mb-4 text-4xl leading-none sm:text-5xl">
+                        <div>PROJECT</div>
+                        <div>PORTFOLIO</div>
+                    </h1>
+                    <footer className="text-right text-sm sm:text-base">
+                        <p>&copy; {new Date().getFullYear()} Made by Alliana:p </p>
+                    </footer>
+                </div>
+
+                    <div className="grid md:grid-cols-2 gap-6 md:gap-2">
+                        <div className="flex flex-col gap-6 sm:gap-12 md:p-4">
                             <ProjectCard
                                 projectnr = "01"
                                 projectyear = "2025 - IN2000 course project"
@@ -57,16 +56,16 @@ export default function Portfolio(){
                                             <p> The app is aimed at both users who have previous experience and/or knowledge of solar panels and energy, and users with less experience.
                                                 Not for commersial use. 
                                             </p>
-                                            <p> We used multiple APIs for the development of the app, including:
-                                                <div className="ms-6">    
-                                                    <ul className="list-disc">
-                                                        <li>Frost (MET) - Weather data (avg. temperature, cloud cover and snow cover) used to calculate electricity production and savings</li>
-                                                        <li>PVGIS (Photovoltaic Geographical Information System) - Relevant data about solar radiation</li>
-                                                        <li>HvaKosterStrømmen - Real-time electricity prices based on different price areas in Norway</li>
-                                                        <li>Mapbox - Map and for searching up addresses. The adresses are linked to the coordinates that are sent to the other APIs that need it for their data</li>
-                                                    </ul>
-                                                </div>
-                                            </p>
+                                            {/* The <ul> is a sibling of the <p>, not a child: a
+                                                list nested inside a paragraph is invalid HTML and
+                                                the browser silently closes the <p> before it. */}
+                                            <p>We used multiple APIs for the development of the app, including:</p>
+                                            <ul className="ms-5 list-disc space-y-1">
+                                                <li>Frost (MET) - Weather data (avg. temperature, cloud cover and snow cover) used to calculate electricity production and savings</li>
+                                                <li>PVGIS (Photovoltaic Geographical Information System) - Relevant data about solar radiation</li>
+                                                <li>HvaKosterStrømmen - Real-time electricity prices based on different price areas in Norway</li>
+                                                <li>Mapbox - Map and for searching up addresses. The adresses are linked to the coordinates that are sent to the other APIs that need it for their data</li>
+                                            </ul>
                                             <p>My tasks were mainly datacollection, dataanalysis and UX/UI</p>
                                         </div>
                                     </div>
@@ -101,7 +100,7 @@ export default function Portfolio(){
                             />
                         </div>
 
-                        <div className="flex flex-col gap-12 p-4 md:mt-30">
+                        <div className="flex flex-col gap-6 sm:gap-12 md:p-4 md:mt-30">
                             <ProjectCard
                                 projectnr = "04"
                                 projectyear = "2021 - IT1 course assignment"
@@ -130,21 +129,20 @@ export default function Portfolio(){
                         </div>
                     </div>
                     
-                    { showDescription && (
-                        <div 
-                            ref = {descriptionRef}
-                            className="relative mt-12 p-4 rounded-lg shadow-lg border border-gray-200"
-                        >
-                            <p className="text-2xl font-semibold mb-2">
-                                {/* {showDescription.projectnr}  */}
-                                {showDescription.projecttitle}
-                            </p>
-                            <p className="text-base text-gray-500">{showDescription.projectyear}</p>
-                            <div className="text-base md:p-6 space-y-2"> {showDescription.description} </div>
-                            <CornerBorder/>
-                        </div>
-                    )}
-                </div>
+                { showDescription && (
+                    <div
+                        ref = {descriptionRef}
+                        className="relative mt-10 p-5 sm:p-6 rounded-lg shadow-lg border border-gray-200"
+                    >
+                        <p className="text-xl sm:text-2xl font-semibold mb-2">
+                            {/* {showDescription.projectnr}  */}
+                            {showDescription.projecttitle}
+                        </p>
+                        <p className="text-sm sm:text-base text-gray-500">{showDescription.projectyear}</p>
+                        <div className="mt-4 text-sm sm:text-base space-y-2"> {showDescription.description} </div>
+                        <CornerBorder/>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -155,17 +153,21 @@ const ProjectCard = ({projectnr, projectyear, projecttitle, projectimage, onClic
         onClick({projectnr, projectyear, projecttitle, description});
     }; 
     return(
-        <div 
-            className="rounded-lg shadow-lg h-90 border border-gray-200 relative overflow-hidden cursor-pointer hover:scale-[1.01] transition"
-            onClick={handleCardClick} 
+        /* A flex column so the image takes whatever height is left under the
+           title instead of being given the card's full height and spilling out
+           the bottom. `min-h-0` is what lets that flex child actually shrink. */
+        <button
+            type="button"
+            className="flex w-full flex-col rounded-lg shadow-lg h-72 sm:h-90 border border-gray-200 relative overflow-hidden cursor-pointer hover:scale-[1.01] transition text-left bg-transparent p-0"
+            onClick={handleCardClick}
         >
-            <p className="p-6 me-2 text-right">
-                <span className="text-3xl text-neutral-800 font-semibold"> {projecttitle} </span>
+            <p className="p-4 sm:p-6 me-2 w-full text-right">
+                <span className="text-2xl sm:text-3xl text-neutral-800 font-semibold"> {projecttitle} </span>
                 {/* <span className="text-5xl font-semibold text-right"> {projectnr}</span> */}
             </p>
-            <img src={projectimage} alt="projectImage" className="object-contain h-full w-auto"></img>
+            <img src={projectimage} alt={projecttitle} className="min-h-0 w-full flex-1 object-contain"></img>
             <CornerBorder/>
-        </div>
+        </button>
     );
 }
 

@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* `wide:` — the layout switch used by the camera home page. It is an
+   orientation test rather than a width breakpoint, because the camera chassis
+   is a landscape object: a 844x390 phone held sideways should get the
+   side-by-side layout, while a 768x1024 tablet held upright should not. */
+@custom-variant wide (@media (min-aspect-ratio: 5/4));
+
 /* Fonts loaded in index.html, exposed as Tailwind utilities:
    font-dm -> DM Mono, font-cond -> Barlow Condensed */
 @theme {
@@ -99,16 +105,21 @@
     text-decoration: inherit;
   }
 
+  /* No flex centering here: it made <body> size #root to its content instead
+     of stretching it, and `min-width: 320px` forced a horizontal scrollbar on
+     the narrowest phones. Pages center themselves. `dvh` tracks the collapsing
+     mobile browser chrome, which `vh` does not. */
   body {
     margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    /* Stop iOS Safari inflating text when a phone is rotated to landscape. */
+    -webkit-text-size-adjust: 100%;
   }
 
+  /* No global h1 size — 3.2em is unreadable on a phone. Each page sets its
+     own responsive heading scale. */
   h1 {
-    font-size: 3.2em;
     line-height: 1.1;
   }
 

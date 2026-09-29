@@ -191,6 +191,13 @@ const CONTACT = [
   },
 ];
 
+/* The three header controls. Roomier padding on touch-sized screens so each
+   one clears the ~44px tap target, tightening to the original chrome from sm
+   up where there is a pointer. */
+const CTRL =
+  "border px-3 py-2 text-[11px] tracking-[.18em] transition-colors " +
+  "hover:border-amber/70 hover:text-amber-deep sm:px-2.5 sm:py-[5px]";
+
 /* A run of film sprocket holes. */
 function Sprockets({ className = "" }) {
   return (
@@ -251,23 +258,24 @@ export default function CVPage() {
     <div
       className={
         (dark ? "cv-dark " : "") +
-        "flex min-h-screen justify-center bg-light-table px-6 pt-28 pb-18 font-mono text-ink"
+        "flex min-h-dvh justify-center bg-light-table px-4 pt-10 pb-12 font-mono text-ink " +
+        "sm:px-6 sm:pt-20 sm:pb-18 lg:pt-28"
       }
     >
       <div className="flex w-[940px] max-w-full flex-col gap-[18px]">
         {/* ---------------- Header ---------------- */}
-        <header className="flex items-end justify-between gap-6">
-          <div className="flex flex-col gap-1.5">
+        <header className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+          <div className="flex min-w-0 flex-col gap-1.5">
             <span className="text-[10px] tracking-[.22em] text-chrome">
             CV 2026
             </span>
-            <h1 className="text-3xl leading-none tracking-[.05em] uppercase">
+            <h1 className="text-2xl leading-tight tracking-[.05em] uppercase sm:text-3xl sm:leading-none">
               Alliana Shari Nazareno
             </h1>
             {/* Each contact item is a self-contained, non-breaking chip that
                 carries its own trailing separator, so the row reflows cleanly
                 at any width and no `·` ever dangles at a line edge. */}
-            <div className="flex flex-wrap items-center text-[13px] tracking-[.1em] text-chrome-dark">
+            <div className="flex flex-wrap items-center text-[12px] tracking-[.06em] text-chrome-dark sm:text-[13px] sm:tracking-[.1em]">
               {CONTACT.map((item, i) => {
                 const last = i === CONTACT.length - 1;
                 const inner = item.href ? (
@@ -293,21 +301,18 @@ export default function CVPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Link
-              to="/"
-              className="border border-ink/25 bg-paper/60 px-2.5 py-[5px] text-[11px] tracking-[.18em] text-chrome-dark hover:border-amber/70 hover:text-amber-deep"
-            >
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
+            <Link to="/" className={`${CTRL} border-ink/25 bg-paper/60 text-chrome-dark`}>
               ◀ HOME
             </Link>
             <button
               type="button"
               onClick={reopenAll}
               className={
-                "border px-2.5 py-[5px] text-[11px] tracking-[.18em] transition-colors " +
+                CTRL +
                 (allOpen
-                  ? "border-amber/70 bg-amber/15 text-amber-deep"
-                  : "border-ink/25 bg-paper/60 text-chrome-dark")
+                  ? " border-amber/70 bg-amber/15 text-amber-deep"
+                  : " border-ink/25 bg-paper/60 text-chrome-dark")
               }
             >
               HELE RULLEN
@@ -317,7 +322,7 @@ export default function CVPage() {
               onClick={toggleTheme}
               aria-pressed={dark}
               aria-label={`Bytt til ${dark ? "lyst" : "mørkt"} modus`}
-              className="border border-ink/25 bg-paper/60 px-2.5 py-[5px] text-[11px] tracking-[.18em] text-chrome-dark transition-colors hover:border-amber/70 hover:text-amber-deep"
+              className={`${CTRL} border-ink/25 bg-paper/60 text-chrome-dark`}
             >
               {dark ? "☀ LYS" : "☾ MØRK"}
             </button>
@@ -347,10 +352,12 @@ export default function CVPage() {
                   <Sprockets className="px-[9px] pb-1" />
 
                   <div className="flex items-stretch gap-[3px] px-1.5">
-                    {/* Lit frame */}
+                    {/* Lit frame. It may shrink and let a long section title
+                        wrap onto a second line rather than push the EXP counter
+                        off the end of the strip on a narrow screen. */}
                     <div
                       className={
-                        "flex shrink-0 items-baseline gap-3 bg-sprocket px-3.5 py-[9px] -outline-offset-1 " +
+                        "flex min-w-0 items-baseline gap-2 bg-sprocket px-2.5 py-[9px] -outline-offset-1 sm:gap-3 sm:px-3.5 " +
                         (isOpen
                           ? "outline outline-2 outline-amber"
                           : "outline outline-1 outline-sprocket/20")
@@ -361,20 +368,27 @@ export default function CVPage() {
                           ink tokens that invert for dark mode. */}
                       <span
                         className={
-                          "text-[10px] tracking-[.14em] " +
+                          "shrink-0 text-[10px] tracking-[.14em] " +
                           (isOpen ? "text-[#8a6a1f]" : "text-[#8a8a7c]")
                         }
                       >
                         {frame}
                       </span>
-                      <span className="text-[16px] tracking-[.08em] text-[#2e2f27] uppercase">
+                      {/* `break-words` is the floor: below ~360px a single long
+                          word like FERDIGHETER is wider than the frame, and
+                          without it the tail spills out over the dark filler
+                          strip and becomes unreadable. */}
+                      <span className="min-w-0 break-words text-[13px] tracking-[.06em] text-[#2e2f27] uppercase max-[359px]:text-[11px] sm:text-[16px] sm:tracking-[.08em]">
                         {section.title}
                       </span>
                     </div>
 
-                    {/* Filler strip */}
-                    <div className="flex flex-1 items-center justify-end bg-sprocket/5 px-3.5 text-[10px] tracking-[.16em] text-edge">
-                      <span className="flex items-center gap-2.5">
+                    {/* Filler strip. `grow shrink-0 basis-auto` — not flex-1 —
+                        so it always reserves room for the EXP counter and the
+                        long titles wrap inside the lit frame instead of the
+                        counter being squeezed out on top of them at 320px. */}
+                    <div className="flex shrink-0 grow basis-auto items-center justify-end bg-sprocket/5 px-2 text-[10px] tracking-[.16em] text-edge sm:px-3.5">
+                      <span className="flex shrink-0 items-center gap-2.5">
                         <span>{section.entries.length} EXP</span>
                         <span
                           className={
@@ -403,14 +417,15 @@ export default function CVPage() {
                   }
                 >
                   <div className="min-h-0 overflow-hidden">
-                    <div className="flex flex-col gap-[18px] border border-ink/15 bg-paper p-[18px_20px] shadow-card">
+                    <div className="flex flex-col gap-[18px] border border-ink/15 bg-paper p-[14px] shadow-card sm:p-[18px_20px]">
                       {section.entries.map((entry, eIndex) => (
                         <article
                           key={eIndex}
-                          className="grid grid-cols-[152px_1fr] items-start gap-4 max-sm:grid-cols-1"
+                          className="grid grid-cols-[152px_1fr] items-start gap-4 max-sm:grid-cols-1 max-sm:gap-1.5"
                         >
-                          {/* Left rail */}
-                          <div className="flex flex-col gap-[3px] pt-0.5">
+                          {/* Left rail — a stacked column beside the body, but a
+                              single date/tag line above it on a narrow screen. */}
+                          <div className="flex flex-col gap-[3px] pt-0.5 max-sm:flex-row max-sm:flex-wrap max-sm:items-baseline max-sm:gap-x-2.5 max-sm:pt-0">
                             {entry.when && (
                               <span className="text-[11px] tracking-[.1em] text-amber-text">
                                 {entry.when}
@@ -463,7 +478,7 @@ export default function CVPage() {
         </div>
 
         {/* ---------------- Footer ---------------- */}
-        <footer className="flex justify-between gap-4 text-[12px] tracking-[.22em] text-chrome-light">
+        <footer className="flex flex-col gap-1 text-[11px] tracking-[.16em] text-chrome-light sm:flex-row sm:justify-between sm:gap-4 sm:text-[12px] sm:tracking-[.22em]">
           <span>DSC-AN14 · {edgeCode}</span>
           <span>Referanser oppgis ved forespørsel</span>
         </footer>
